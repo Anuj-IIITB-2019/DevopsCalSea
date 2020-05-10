@@ -1,0 +1,42 @@
+pipeline {
+  environment {
+    registry = "anujdocker01/devops-calsea"
+    registryCredential = 'docker-hub-credentials'
+    dockerImage = ''
+  }
+  agent any
+  stages {
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/Anuj-IIITB-2019/DevopsCalSea'
+      }
+    }
+    stage('Build Executable Jar'){
+        steps {
+             sh 'mvn clean test package'
+        }
+    }
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry
+        }
+      }
+    }
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry"
+      }
+    }
+  }
+    
+}
