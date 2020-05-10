@@ -1,5 +1,5 @@
 FROM java:8
 WORKDIR /
-ADD CalSea-1.0-SNAPSHOT.jar CalSea-1.0-SNAPSHOT.jar
+ADD /var/lib/jenkins/workspace/CalseaPipeline/target/CalSea-1.jar CalSea.jar
 EXPOSE 8080
-CMD java - jar CalSea-1.0-SNAPSHOT.jar
+CMD java - jar CalSea.jar
