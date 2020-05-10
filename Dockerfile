@@ -1,5 +1,5 @@
 FROM java:8
 WORKDIR /
-ADD DevopsCalSea.jar DevopsCalSea.jar
+ADD CalSea-1.0-SNAPSHOT.jar CalSea-1.0-SNAPSHOT.jar
 EXPOSE 8080
-CMD java - jar DevopsCalSea.jar
+CMD java - jar CalSea-1.0-SNAPSHOT.jar
